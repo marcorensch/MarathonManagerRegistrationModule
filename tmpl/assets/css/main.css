@@ -1,0 +1,16 @@
+th.reg_lbl{
+    vertical-align: top !important;
+}
+@media screen{
+    /* Hide Printversion of reg info on screens */
+    body > div.registrationInfo {
+        display:none;
+    }
+}
+
+@media print {
+    body>*:not(:last-child) { display: none; }
+    div.printed-page {
+        page-break-before: always;
+    }
+}
