@@ -318,7 +318,7 @@ class ModNxMarathonRegHelper{
             'participants' => 'Läufer',
             //'maps_count' => 'Anzahl Karten',
             'lastinfolang' => 'Sprache Dokumente',
-            'maps_price_total' => 'Preis für Karten',
+            //'maps_price_total' => 'Preis für Karten',
             'reg_price' => 'Anmeldegebühr',
             'total_price' => 'Startgebühr total',
             'reference_num' => 'Referenz Nummer',
@@ -727,6 +727,9 @@ class ModNxMarathonRegHelper{
             $formData->errors[] = $category->msg;
         }
         $year = HtmlHelper::date($date, 'Y');
+
+        // Override maps price total to 0 --> based on need from DV as of changes for 2022 Mail from 23.10.21
+        // $formData->maps_price_total = 0; --> gelöst via HTML Formular & dort genullt
 
         try{
             // Get a db connection.

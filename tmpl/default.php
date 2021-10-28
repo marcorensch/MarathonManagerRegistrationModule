@@ -107,12 +107,15 @@ defined('_JEXEC') or die;
                     </div>
                 </div>
             </fieldset>
-            <fieldset class="uk-fieldset nx-animate uk-hidden">
+            <fieldset class="uk-fieldset nx-animate">
                 <div class="uk-margin-top">
                     <div class="uk-margin">
                         <h3 class="uk-h4 uk-flex uk-flex-middle"><span style="font-size: .7em"><i class="fas fa-map"></i></span><span class="uk-margin-small-left">Karten</span></h3>
                     </div>
-                    <div class="uk-margin uk-grid-small uk-child-width-expand uk-grid uk-flex uk-flex-middle">
+                    <div class="uk-margin uk-width-2-3@m">
+                        <p class="uk-margin-small-left">Jedes Team bekommt zwei Karten, ohne Zusatzkosten. Die Karten werden am Massenstart am Samstag abgegeben. Am Sonntag gibt es wieder zwei neue Karten pro Team. Die Karten sind auf wetterfestes Papier "Antius 800" gedruckt.</p>
+                    </div>
+                    <div class="uk-margin uk-grid-small uk-child-width-expand uk-grid uk-flex uk-flex-middle uk-hidden">
                         <div>
                             <select class="uk-select" id="maps" name="maps" required="true" default="2">
                                 <!--
@@ -131,7 +134,7 @@ defined('_JEXEC') or die;
                         </div>
                     </div>
                 </div>
-                <input class="uk-hidden" type="text" id="maps_price_total" name="maps_price_total" value="<?php echo $initialPriceForMaps;?>" />
+                <input class="uk-hidden" type="text" id="maps_price_total" name="maps_price_total" value="0" />
             </fieldset>
             <fieldset class="uk-fieldset uk-margin-large-top nx-animate">
                 <div>
