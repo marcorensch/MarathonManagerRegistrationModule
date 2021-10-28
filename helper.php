@@ -16,7 +16,10 @@ use Joomla\CMS\Date\Date;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 
+
+
 class ModNxMarathonRegHelper{
+
     public static function getComponentParams($extension){
         if($extension){
             try{
@@ -223,21 +226,9 @@ class ModNxMarathonRegHelper{
     }
 
     public static function buildHtml($data){
-        $rowsToBuild = array(
-                            'created'=>'Registrationsdatum',
-                            'teamname'=>'Teamname',
-                            'name' => 'Kategorie',
-                            'contactemail' => 'Kontakt E-Mail',
-                            'emergency_number' => 'Notfall Telefonnummer',
-                            'arrival_date' => 'Anmeldung vor Ort am',
-                            'arrival_type' => 'Ankunft mit',
-                            'participants' => 'Läufer',
-                            'maps_count' => 'Anzahl Karten',
-                            'maps_price_total' => 'Preis für Karten',
-                            'reg_price' => 'Anmeldegebühr',
-                            'total_price' => 'Startgebühr total',
-                            'reference_num' => 'Referenz Nummer',
-        );
+
+        $rowsToBuild = self::buildRowsToBuild();
+        $lastinfoLanguages = self::buildLastInfoLanguages();
 
         $html = '';
         foreach($rowsToBuild as $key => $title){
@@ -264,6 +255,9 @@ class ModNxMarathonRegHelper{
                         break;
                     case 'reference_num':
                         $value = '<b style="font-size: 1.1em">' . $data->$key . '</b>';
+                        break;
+                    case 'lastinfolang':
+                        $value = '<span>' . $lastinfoLanguages[$data->$key] . '</span>';
                         break;
                     default:
                         $value = $data->$key;
@@ -312,10 +306,9 @@ class ModNxMarathonRegHelper{
         return $db->loadObjectList();
     }
 
-    private static function buildMail($contents){
-        $rowsToBuild = array(
+    private static function buildRowsToBuild(){
+        return array(
             'created'=>'Registrationsdatum',
-            'id'=>'Registrations ID',
             'teamname'=>'Teamname',
             'name' => 'Kategorie',
             'contactemail' => 'Kontakt E-Mail',
@@ -323,13 +316,28 @@ class ModNxMarathonRegHelper{
             'arrival_date' => 'Anmeldung vor Ort am',
             'arrival_type' => 'Ankunft mit',
             'participants' => 'Läufer',
-            'maps_count' => 'Anzahl Karten',
-            'maps_price_total' => 'Preis für Karten (Total)',
-            'reg_price' => 'Anmeldegebühr Team',
-            'reference_num' => 'Referenznummer',
-            'total_price' => 'Startgebühr Total',
-
+            //'maps_count' => 'Anzahl Karten',
+            'lastinfolang' => 'Sprache Dokumente',
+            'maps_price_total' => 'Preis für Karten',
+            'reg_price' => 'Anmeldegebühr',
+            'total_price' => 'Startgebühr total',
+            'reference_num' => 'Referenz Nummer',
         );
+    }
+
+    private static  function buildLastInfoLanguages(){
+        return array(
+            'de' => 'Deutsch',
+            'fr' => 'Französisch',
+            'en' => 'Englisch',
+        );
+    }
+
+    private static function buildMail($contents){
+
+        $rowsToBuild = self::buildRowsToBuild();
+        $lastinfoLanguages = self::buildLastInfoLanguages();
+
         $body = '';
         $rows = '';
         foreach($rowsToBuild as $key => $title){
@@ -357,10 +365,12 @@ class ModNxMarathonRegHelper{
                     case 'reference_num':
                         $value = '<b style="font-size: 1.1em">' . $contents->$key . '</b>';
                         break;
+                    case 'lastinfolang':
+                        $value = '<span>' . $lastinfoLanguages[$contents->$key] . '</span>';
+                        break;
                     default:
                         $value = $contents->$key;
                 }
-
 
                 $rows .= "<tr><td style='width:50%' width='50%'>$title</td><td style='width:50%' width='50%'>$value</td></tr>";
             }
@@ -739,6 +749,7 @@ class ModNxMarathonRegHelper{
                 $db->quote('' . $formData->eventid),
                 $db->quote('' . $formData->maps),
                 $db->quote('' . $formData->maps_price_total),
+                $db->quote('' . $formData->lastinfolang),
                 $db->quote(0),
                 $db->quote('' . $formData->participantsJson),
                 $db->quote('' . $formData->privacy),
@@ -761,11 +772,11 @@ class ModNxMarathonRegHelper{
                 'eventid',
                 'maps_count',
                 'maps_price_total',
+                'lastinfolang',
                 'paid',
                 'participants',
                 'privacy',
                 'teamcategory',
-
                 'total_price',
                 'created_by',
                 'modified_by',

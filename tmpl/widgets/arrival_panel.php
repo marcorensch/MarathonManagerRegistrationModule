@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 
-<div class="privacy_panel">
+<div class="arrival_panel">
     <div class="uk-margin">
         <h2 class="uk-h3"><i class="fas fa-bus"></i> Anreise</h2>
     </div>

@@ -107,19 +107,23 @@ defined('_JEXEC') or die;
                     </div>
                 </div>
             </fieldset>
-            <fieldset class="uk-fieldset nx-animate">
+            <fieldset class="uk-fieldset nx-animate uk-hidden">
                 <div class="uk-margin-top">
                     <div class="uk-margin">
                         <h3 class="uk-h4 uk-flex uk-flex-middle"><span style="font-size: .7em"><i class="fas fa-map"></i></span><span class="uk-margin-small-left">Karten</span></h3>
                     </div>
                     <div class="uk-margin uk-grid-small uk-child-width-expand uk-grid uk-flex uk-flex-middle">
                         <div>
-                            <select class="uk-select" id="maps" name="maps" required="true">
+                            <select class="uk-select" id="maps" name="maps" required="true" default="2">
+                                <!--
                                 <option value="1">Eine Karte (Im Startgeld inbegriffen)</option>
+                                -->
                                 <option value="2">Zwei Karten</option>
+                                <!--
                                 <option value="3">Drei Karten</option>
                                 <option value="4">Vier Karten</option>
                                 <option value="5">Fünf Karten</option>
+                                -->
                             </select>
                         </div>
                         <div class="">
@@ -150,6 +154,9 @@ defined('_JEXEC') or die;
                 <div class="addParticipentBtnContainer uk-width-1-1 uk-margin">
                     <div class="uk-button uk-button-secondary addRunner"><span uk-icon="icon:plus; ratio:.6"></span> Läufer hinzufügen</div>
                 </div>
+            </fieldset>
+            <fieldset class="uk-fieldset uk-margin-large nx-animate">
+                <?php include "widgets/language_panel.php"; ?>
             </fieldset>
             <fieldset class="uk-fieldset uk-margin-large nx-animate">
                 <?php include "widgets/arrival_panel.php"; ?>
