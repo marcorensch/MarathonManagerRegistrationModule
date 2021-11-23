@@ -19,7 +19,8 @@ defined('_JEXEC') or die;
     <div class="uk-margin">
         <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-grid-small" uk-grid>
             <div>
-                <select class="uk-select" id="lastinfolang" name="lastinfolang" default="de">
+                <select class="uk-select" id="lastinfolang" name="lastinfolang" default="" required="true">
+                    <option value="">Bitte wählen</option>
                     <option value="de">Deutsch</option>
                     <option value="fr">Französisch</option>
                     <option value="en">Englisch</option>
